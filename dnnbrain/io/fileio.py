@@ -92,15 +92,15 @@ class StimulusFile:
         for idx, key in enumerate(data_keys):
             if key == 'stimID':
                 if stimuli['type'] in ('image', 'video_clip'):
-                    dtype = np.str
+                    dtype = np.str_
                 else:
                     var_data[idx] = np.float64(var_data[idx])
-                    dtype = np.int
+                    dtype = np.int64
             elif key == 'label':
                 var_data[idx] = np.float64(var_data[idx])
-                dtype = np.int
+                dtype = np.int64
             elif key == 'condition':
-                dtype = np.str
+                dtype = np.str_
             else:
                 dtype = np.float
             data[key] = np.asarray(var_data[idx], dtype=dtype)
@@ -136,7 +136,7 @@ class StimulusFile:
 
             # write variable data
             wf.write('data={}\n'.format(','.join(data.keys())))
-            var_data = np.array(list(data.values())).astype(np.str).T
+            var_data = np.array(list(data.values())).astype(np.str_).T
             var_data = [','.join(row) for row in var_data]
             wf.write('\n'.join(var_data))
 
